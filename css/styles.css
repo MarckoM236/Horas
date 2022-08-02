@@ -1,0 +1,42 @@
+#virtual-keyboard {
+    /* border: 5px #212F3D double;*/
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 15px;
+    /*background-color: #e44141;*/
+}
+
+.keyboard-row {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#virtual-keyboard a {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #000000;
+    padding: 3px 7px;
+    font-size: 40px;
+    color:#ffffff;
+    text-align: center;
+    margin-right: 15px;
+}
+
+#virtual-keyboard a:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+#inicio{
+    width: 180px;
+    height: 80px;
+    font-size: 50px
+}
+
+#fin{
+    width: 180px;
+    height: 80px;
+    font-size: 50px
+}

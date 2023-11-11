@@ -1,7 +1,7 @@
 # Horas
 Sistema básico para el Control de Horas en procesos de producción. Empleando PHP, JavaScript (Ajax, Jquery) y Mysql.
 
-#Instalacion
+# Instalacion
 Clonar el repositorio en el servidor dentro de la siguiente estructura de directorios:
 PHP/HORAS 
 

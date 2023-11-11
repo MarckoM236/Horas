@@ -1,8 +1,11 @@
+
+const domain = "/PHP/HORAS";
+
 function show(identificacion){
     var dataString='txbIdentificacion='+identificacion +'&show=1';
  $.ajax({
     type:"POST",
-    url:"/app/controller/ajaxController.php?action=show&controller=produccion",
+    url: `${domain}/App/Controller/ajaxController.php?action=show&controller=produccion`,
     data: dataString,
     dataType: 'json',
 
@@ -11,7 +14,7 @@ function show(identificacion){
         var res=Object.values(response);
         for(let i=0;i<res.length;i++){
             //console.log(res[i]['ot_produc']);
-            $('input#ot').val(res[i]['ot_produc']);
+            $('input#ot').val(res[i]['id_ordenTrabajo']);
             $('input#tablero').val(res[i]['tab_produc']);
             $('input#cuerpo').val(res[i]['cue_produc']);
             $('input#actividad').val(res[i]['act_produc']);
@@ -25,7 +28,7 @@ function ValidateUser(identificacion,ot,tablero,cuerpo,actividad){
     var dataString='txbIdentificacion='+identificacion +'&user=1';
  $.ajax({
     type:"POST",
-    url:"/app/controller/ajaxController.php?action=validateUS&controller=produccion",
+    url: domain+"/App/Controller/ajaxController.php?action=validateUS&controller=produccion",
     data: dataString,
     dataType: 'json',
 
@@ -35,7 +38,8 @@ function ValidateUser(identificacion,ot,tablero,cuerpo,actividad){
             alert('El usuario no esta registrado');   
         }
         else{
-            inicio(identificacion,ot,tablero,cuerpo,actividad);
+            let id = response[0].id_emp;
+            inicio(id,ot,tablero,cuerpo,actividad);
         }
         
     }
@@ -43,18 +47,18 @@ function ValidateUser(identificacion,ot,tablero,cuerpo,actividad){
  });
 }
 
-function inicio(identificacion,ot,tablero,cuerpo,actividad){
- var dataString='txbIdentificacion='+identificacion+'&txbOt='+ot+'&txbTablero='+tablero+'&txbCuerpo='+cuerpo+'&txbActividad='+actividad+'&insert=1';
+function inicio(id,ot,tablero,cuerpo,actividad){
+ var dataString='txbId='+id+'&txbOt='+ot+'&txbTablero='+tablero+'&txbCuerpo='+cuerpo+'&txbActividad='+actividad+'&insert=1';
  $.ajax({
     type:"POST",
-    url:"/app/controller/ajaxController.php?action=insert&controller=produccion",
+    url: domain+"/App/Controller/ajaxController.php?action=insert&controller=produccion",
     data: dataString,
     dataType: 'json',
 
     success: function(response){
         if(response.status=='ok'){
-            //alert(response.result);
-            window.location="/app/view/sipcommb.html";
+            alert(response.result);
+            window.location=domain;
         }
         else{
             alert(response.result);
@@ -67,17 +71,18 @@ function fin(identificacion,cantidad){
     var dataString='txbIdentificacion='+identificacion+'&txbCantidad='+cantidad+'&update=1';
  $.ajax({
     type:"POST",
-    url:"/app/controller/ajaxController.php?action=update&controller=produccion",
+    url: domain+"/App/Controller/ajaxController.php?action=update&controller=produccion",
     data: dataString,
     dataType: 'json',
 
     success: function(response){
         if(response.status=='ok'){
-            //alert(response.result);
-            window.location="/app/view/sipcommb.html";
+            alert(response.result);
+            window.location=domain;
         }
         else{
             alert(response.result);
+            window.location=domain;
         }
     }
  });
@@ -87,7 +92,7 @@ function reporteXFecha(fechaIn,fechaFi){
     var dataString='txbDateIn=' + fechaIn + '&txbDateFi=' + fechaFi +'&showXDate=1';
  $.ajax({
     type:"POST",
-    url:"/app/controller/ajaxController.php?action=show&controller=reporte",
+    url: domain+"/App/Controller/ajaxController.php?action=show&controller=reporte",
     data: dataString,
     dataType: 'json',
 
@@ -120,7 +125,7 @@ function reporte(){
     var dataString='show=1';
  $.ajax({
     type:"POST",
-    url:"/app/controller/ajaxController.php?action=show&controller=reporte",
+    url: domain+"/App/Controller/ajaxController.php?action=show&controller=reporte",
     data: dataString,
     dataType: 'json',
 

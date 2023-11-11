@@ -15,7 +15,7 @@ class Conexion
         $this->host = 'localhost';
         $this->usuario = 'root';
         $this->pass = '';
-        $this->db = 'tablesa';
+        $this->db = 'planta';
     }
  
     function connect(){

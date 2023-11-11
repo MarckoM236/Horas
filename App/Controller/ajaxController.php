@@ -1,13 +1,15 @@
 <?php 
 //echo ('prueba1');
-include_once('produccionController.php');
-include_once('reporteController.php');
-include_once('app/model/produccion.php');
-include_once('app/model/reporteModel.php');
-//echo('prueba');
+require_once "./produccionController.php";
+require_once "./reporteController.php";
+require_once "../Model/produccion.php";
+require_once "../Model/conexion.php";
+require_once "../Model/reporteModel.php";
+
+
 if($_GET['action'] and $_GET['controller']){
     if($_GET['controller']=='produccion'){
-//print_r($_GET);
+
         $object= new ProduccionController();
             switch($_GET['action']){
 		case 'validateUS':
@@ -43,4 +45,3 @@ if($_GET['action'] and $_GET['controller']){
             }
     }        
 }
-?>

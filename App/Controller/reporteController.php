@@ -1,5 +1,4 @@
 <?php
-@include_once('../model/reporteModel.php');
 
 class ReporteController{
 
@@ -18,7 +17,7 @@ class ReporteController{
 
         return $res;
     }
-    include_once('../view/reporte.php');
+    //include_once('../view/reporte.php');
    }
 
 }

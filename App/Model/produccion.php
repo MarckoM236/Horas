@@ -1,5 +1,5 @@
 <?php 
-require_once('conexion.php');
+
 class Produccion
 {
     private $cedu_produc;
@@ -9,6 +9,8 @@ class Produccion
     private $act_produc;
     private $cant_produc;
     private $con;
+    private $id_emp;
+    private $id_order;
 
     function __construct()
     {
@@ -36,6 +38,12 @@ class Produccion
     public function setCantidad($val){
         $this->cant_produc=$val;
     }
+    public function setIdEmp($val){
+        $this->id_emp = $val;
+    }
+    public function setIdOrder($val){
+        $this->id_order = $val;
+    }
 
     //getters
     public function getCedula(){
@@ -56,22 +64,41 @@ class Produccion
     public function getCantidad(){
         return $this->cant_produc;
     }
+    public function getIdEmp(){
+        return $this->id_emp;
+    }
+    public function getIdOrder(){
+        return $this->id_order;
+    }
     
     function show(){
-        $sql="select ot_produc,tab_produc,cue_produc,act_produc from produccion where cedu_produc=".$this->cedu_produc." and DATE(date_ini_produc)=DATE(NOW()) and cant_produc is null and date_fin_produc is null";
+        $sql="select pr.id_ordenTrabajo,pr.tab_produc,pr.cue_produc,pr.act_produc from produccion pr LEFT JOIN empleados em ON em.id_emp = pr.id_emp
+        where em.cedu_emp=".$this->cedu_produc." and DATE(pr.date_ini_produc)=DATE(NOW()) and pr.cant_produc is null and pr.date_end_produc is NULL";
         $res=$this->con->getData($sql);
         return $res;
     }
 
     function validateUser(){
-        $sql="SELECT us.cedula FROM empleado us WHERE us.cedula=".$this->cedu_produc.";";
+        $sql="SELECT us.id_emp,us.cedu_emp FROM empleados us WHERE us.cedu_emp=".$this->cedu_produc.";";
+        $res=$this->con->getData($sql);
+        return $res;
+    }
+
+    function findOrderById(){
+        $sql = "SELECT idOrdenTrabajo from orden_trabajo where NumOrden = ".$this->ot_produc;
+        $res=$this->con->getData($sql);
+        return $res;
+    }
+
+    function validateActivity(){
+        $sql = "SELECT * FROM produccion WHERE  id_emp=".$this->id_emp." AND  DATE(date_ini_produc)=DATE(NOW()) AND  cant_produc IS NULL AND  date_end_produc IS NULL";
         $res=$this->con->getData($sql);
         return $res;
     }
 
     function insert(){
        $data=array();
-       $sql="INSERT INTO produccion (cedu_produc, ot_produc, tab_produc, cue_produc, act_produc, date_ini_produc) VALUES (".$this->cedu_produc.",'".$this->ot_produc."','".$this->tab_produc."','".$this->cue_produc."','".$this->act_produc."',now());"; 
+       $sql="INSERT INTO produccion (id_emp, id_ordenTrabajo, tab_produc, cue_produc, act_produc, date_ini_produc) VALUES (".$this->id_emp.",'".$this->id_order."','".$this->tab_produc."','".$this->cue_produc."','".$this->act_produc."',now());"; 
        //print_r($sql);
        $res=$this->con->executeInstruction($sql);
         if($res){
@@ -87,7 +114,7 @@ class Produccion
 
     function update(){
         $data=array();
-       $sql="UPDATE produccion set cant_produc=".$this->cant_produc.", date_fin_produc=now() where cedu_produc=".$this->cedu_produc." and DATE(date_ini_produc)=DATE(NOW()) and cant_produc is null and date_fin_produc is null ;"; 
+       $sql="UPDATE produccion set cant_produc=".$this->cant_produc.", date_end_produc=now() where id_emp=".$this->id_emp." and DATE(date_ini_produc)=DATE(NOW()) and cant_produc is null and date_end_produc is null ;"; 
        //print_r($sql);
        $res=$this->con->executeInstruction($sql);
         if($res){

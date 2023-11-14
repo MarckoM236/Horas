@@ -1,8 +1,8 @@
 <?php 
-//echo ('prueba1');
 require_once "./produccionController.php";
 require_once "./reporteController.php";
 require_once "../Model/produccion.php";
+require_once "../config.php";
 require_once "../Model/conexion.php";
 require_once "../Model/reporteModel.php";
 
@@ -12,7 +12,7 @@ if($_GET['action'] and $_GET['controller']){
 
         $object= new ProduccionController();
             switch($_GET['action']){
-		case 'validateUS':
+                case 'validateUS':
                     $re=$object->validateUS();
                     echo json_encode($re);
                     break;
@@ -41,7 +41,6 @@ if($_GET['action'] and $_GET['controller']){
                     $re=$object->show();
                     echo json_encode($re);
                     break;
-
             }
     }        
 }

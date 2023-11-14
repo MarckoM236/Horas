@@ -15,8 +15,8 @@
 				<a class="navbar-brand"><img src="./Public/img/tablesa.jpg" alt=""></a>
 			</div>
 			<div>
-				<a class="navbar-brand" href="./">Inicio</a>
-				<a class="navbar-brand" href="?url=reporte">Reportes</a>
+				<a class="navbar-brand" href="./index">Inicio</a>
+				<a class="navbar-brand" href="./reporte">Reportes</a>
 			</div>
 		</nav>
 		<br>
@@ -32,6 +32,9 @@
 		}
 		else if($_GET['url']=="reporte") {
 			include_once ("./App/View/reporte.php"); 
+		}
+		else{
+			include_once ("./App/View/404.php"); 
 		}
 		?>
 		<!-- end content-->

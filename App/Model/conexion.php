@@ -12,10 +12,10 @@ class Conexion
  
     function __construct()
     {
-        $this->host = 'localhost';
-        $this->usuario = 'root';
-        $this->pass = '';
-        $this->db = 'planta';
+        $this->host = SERVER;
+        $this->usuario = USER_DB;
+        $this->pass = PASS_DB;
+        $this->db = DATABASE;
     }
  
     function connect(){

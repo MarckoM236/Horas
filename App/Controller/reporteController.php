@@ -17,7 +17,6 @@ class ReporteController{
 
         return $res;
     }
-    //include_once('../view/reporte.php');
    }
 
 }

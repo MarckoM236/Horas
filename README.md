@@ -7,12 +7,12 @@ PHP/HORAS
 
 Montar la base de datos Mysql ubicada en el directorio DB del proyecto.
 
-Ubicar el archivo conexion.php ubicado en la ruta
-App/Model/conexion.php
+Ubicar el archivo config.php ubicado en la ruta
+App/config.php
 dentro de la estructura del proyecto y cambiar los datos de conexion:
 
-  $this->host = 'localhost';
-  $this->usuario = 'root';
-  $this->pass = '';
-  $this->db = 'planta';
+  'SERVER','localhost'
+  'DATABASE','planta'
+  'USER_DB','root'
+  'PASS_DB',''
 
